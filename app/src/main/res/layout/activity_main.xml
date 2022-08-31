@@ -242,7 +242,7 @@
             android:padding="24dp"
             android:layout_margin="5dp"
             android:textColor="@color/btnText"
-            android:onClick="onDigit"
+            android:onClick="onClear"
             />
 
     </LinearLayout>

@@ -17,4 +17,7 @@ class MainActivity : AppCompatActivity() {
     fun onDigit(view:View){
         display?.append((view as Button).text);
     }
+    fun onClear(view:View){
+        display?.text = ""
+    }
 }
