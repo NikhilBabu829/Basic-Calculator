@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import java.lang.ArithmeticException
 
 class MainActivity : AppCompatActivity() {
     var lastNumeric : Boolean = false;
@@ -34,6 +35,57 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun onEquals(view: View){
+        if(lastNumeric){
+            var displayValue = display?.text.toString()
+            var prefix = "";
+            if(displayValue.startsWith("-")) {
+                prefix = "-";
+                displayValue = displayValue.substring(1);
+            }
+            try {
+                if(displayValue.contains("-")) {
+                    var valueAfterSplit = displayValue.split("-")
+                    var one = valueAfterSplit[0];
+                    var two = valueAfterSplit[1];
+                    if(prefix.isNotEmpty()){
+                        one = prefix + one;
+                    }
+                    display?.text = (one.toDouble() - two.toDouble()).toString();
+                }
+                if(displayValue.contains("x")) {
+                    var valueAfterSplit = displayValue.split("x")
+                    var one = valueAfterSplit[0];
+                    var two = valueAfterSplit[1];
+                    if(prefix.isNotEmpty()){
+                        one = prefix + one;
+                    }
+                    display?.text = (one.toDouble() * two.toDouble()).toString();
+                }
+                if(displayValue.contains("/")) {
+                    var valueAfterSplit = displayValue.split("/")
+                    var one = valueAfterSplit[0];
+                    var two = valueAfterSplit[1];
+                    if(prefix.isNotEmpty()){
+                        one = prefix + one;
+                    }
+                    display?.text = (one.toDouble() / two.toDouble()).toString();
+                }
+                if(displayValue.contains("+")) {
+                    var valueAfterSplit = displayValue.split("+")
+                    var one = valueAfterSplit[0];
+                    var two = valueAfterSplit[1];
+                    if(prefix.isNotEmpty()){
+                        one = prefix + one;
+                    }
+                    display?.text = (one.toDouble() + two.toDouble()).toString();
+                }
+            }catch (e:ArithmeticException){
+                e.printStackTrace()
+            }
+        }
+    }
+
     fun onOperator(view: View){
         display?.text.let {
             if(lastNumeric && !onOperatorAdded(it.toString())){
@@ -52,4 +104,6 @@ class MainActivity : AppCompatActivity() {
             value.contains("+")||value.contains("-")||value.contains("x")||value.contains("/")
         }
     }
+
+
 }

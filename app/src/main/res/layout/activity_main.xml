@@ -245,7 +245,7 @@
             android:padding="24dp"
             android:textColor="@color/btnText"
             android:layout_margin="5dp"
-            android:onClick="onDigit"
+            android:onClick="onEquals"
             />
         <Button
             android:layout_width="match_parent"
